@@ -24,7 +24,6 @@ function App() {
             setLoading(false);
         }
     };
-
     return (
         <div>
             <h1>Videos from API</h1>
@@ -48,5 +47,4 @@ function App() {
         </div>
     );
 }
-
 export default App;
