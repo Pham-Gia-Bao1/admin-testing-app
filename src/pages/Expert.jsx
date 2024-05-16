@@ -1,6 +1,6 @@
 import Post from "./Post";
-const User = () => {
+const Expert = () => {
     return <Post /> // thay omponent khác vào
   };
 
-  export default User;
+  export default Expert;

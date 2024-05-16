@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import LogoBitStorm from "../../assets/images/LogoBitStorm.svg";
+
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -8,7 +10,6 @@ import {
   VideoCameraOutlined,
   HomeOutlined,
   AudioOutlined,
-//   DatabaseFilled,
   MessageFilled,
   MailFilled,
   LoginOutlined,
@@ -45,13 +46,14 @@ const LayoutAdmin = ({ main }) => {
         style={{
           padding: "10px",
           borderRadius: "10px",
-          //   paddingTop : "100px"
         }}
         trigger={null}
         collapsible
         collapsed={collapsed}
       >
-        <div className="demo-logo-vertical" />
+        <div className="demo-logo-vertical">
+          <img src={LogoBitStorm} alt="BitStorm Logo" />
+        </div>
         <Menu
           style={{
             padding: "10px",
@@ -84,21 +86,26 @@ const LayoutAdmin = ({ main }) => {
             },
             {
               key: "5",
+              icon: <UserOutlined />,
+              label: <Link to="/expert">Expert</Link>,
+            },
+            {
+              key: "6",
               icon: <MailFilled />,
               label: <Link to="/contact">Contact</Link>,
             },
             {
-              key: "6",
+              key: "7",
               icon: <UploadOutlined />,
               label: <Link to="/logout">Logout</Link>,
             },
             {
-              key: "7",
+              key: "8",
               icon: <LoginOutlined />,
               label: <Link to="/signin">Sign In</Link>,
             },
             {
-              key: "8",
+              key: "9",
               icon: <LogoutOutlined />,
               label: <Link to="/signup">Sing Up</Link>,
             },

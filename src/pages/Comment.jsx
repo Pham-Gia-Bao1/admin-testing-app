@@ -1,6 +1,6 @@
 import Post from "./Post";
 
 const Comment = () => {
-    return <Post />
+    return <Post />  // thay omponent khác vào
   };
 export default Comment;

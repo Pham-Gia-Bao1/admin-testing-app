@@ -1,6 +1,6 @@
 import Post from "./Post";
 const Booking = () => {
-    return <Post />
-  };
+  return <Post />; // thay omponent khác vào
+};
 
-  export default Booking;
+export default Booking;

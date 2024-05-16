@@ -76,3 +76,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## install ant design
 --->>> npm install antd --save
+
+
+## install animation lib
+---> npm install --save aos@next
