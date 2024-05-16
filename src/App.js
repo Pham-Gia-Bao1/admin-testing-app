@@ -1,57 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  // code của Tuan
-  useEffect(() => {
-    fetchData();
-  }, []);
+import Dashboard from "./pages/DashBoard";
+import Contact from "./pages/Contact";
+import Post from "./pages/Post";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Comment from "./pages/Comment";
+import User from "./pages/User";
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/api/items");
+import LayoutAdmin from "./components/layout";
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      setVideos(data);
-    } catch (error) {
-      console.error("Error fetching data:", error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+export default function App() {
   return (
     <div>
-      <h1>Videos from API</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <ul>
-          {videos.map((video) => (
-            <li key={video.id}>
-              <h2>{video.title}</h2>
-              <p>{video.description}</p>
-              <p>Duration: {video.duration} seconds</p>
-              <p>Views: {video.view}</p>
-              <p>Likes: {video.like_count}</p>
-              <p>Dislikes: {video.dislike_count}</p>
-              <iframe
-                title={video.title}
-                width="560"
-                height="315"
-                src={video.youtube_link}
-                frameBorder="0"
-                allowFullScreen
-              ></iframe>
-            </li>
-          ))}
-        </ul>
-      )}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LayoutAdmin main={<Dashboard />} />} />
+          <Route path="/dashboard" element={<LayoutAdmin main={<Dashboard />} />} />
+          <Route path="/posts" element={<LayoutAdmin main={<Post />} />} />
+          <Route path="/comments" element={<LayoutAdmin main={<Comment />} />} />
+          <Route path="/user" element={<LayoutAdmin main={<User />} />} />
+          <Route path="/contact" element={<LayoutAdmin main={<Contact />} />} />
+          <Route path="/signin" element={<LayoutAdmin main={<SignIn />} />} />
+          <Route path="/signup" element={<LayoutAdmin main={<SignUp />} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
-export default App;
