@@ -1,6 +1,6 @@
-import Post from "./Post";
+import Column from "../components/column";
 const Contact = () => {
-    return <Post />  // thay omponent khác vào
-  };
+  return <Column />; // thay omponent khác vào
+};
 
-  export default Contact;
+export default Contact;

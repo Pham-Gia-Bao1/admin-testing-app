@@ -1,6 +1,6 @@
-import Post from "./Post";
+import Column from "../components/column";
 const Expert = () => {
-    return <Post /> // thay omponent khác vào
-  };
+  return <Column />; // thay omponent khác vào
+};
 
-  export default Expert;
+export default Expert;

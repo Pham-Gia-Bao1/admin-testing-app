@@ -1,6 +1,5 @@
-import Post from "./Post";
-
+import Column from "../components/column";
 const Comment = () => {
-    return <Post />  // thay omponent khác vào
-  };
+  return <Column apiEndpoint="https://jsonplaceholder.typicode.com/comments" />; // thay omponent khác vào
+};
 export default Comment;
