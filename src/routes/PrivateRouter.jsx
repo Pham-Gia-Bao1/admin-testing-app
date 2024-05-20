@@ -1,13 +1,12 @@
 import { Navigate, Route } from "react-router-dom";
-import { getAccessToken } from "../utils/helpers";
+import { getStorage } from "../utils/helpers";
 
-const withPrivateRoute = (props) => {
-  const accessToken = getAccessToken();
-
+const withPrivateRoute = (props, index) => {
+  const accessToken = getStorage('__token__');
   if (accessToken) {
-    return <Route key={props.key} {...props} />;
+    return <Route key={props.index} {...props} />;
   }
-  return <Navigate to="/login" />;
+  return <Route path="*" element={<Navigate to="/signin" />} />;
 };
 
 export default withPrivateRoute;
