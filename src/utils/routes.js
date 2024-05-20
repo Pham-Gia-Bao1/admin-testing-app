@@ -12,10 +12,18 @@ import Post from "../pages/Post";
 
 export const publicRoutes = [
   {
-    path: "/login",
-    element: SignIn,
+    path: "/signin",
+    element: <SignIn />,
     exact: true,
   },
+  {
+    path: "/signup",
+    element: <SignUp />,
+    exact: true,
+  },
+];
+
+export const privateRoutes = [
   {
     path: "/",
     element: <LayoutAdmin main={<Dashboard />} />,
@@ -51,11 +59,4 @@ export const publicRoutes = [
     element: <LayoutAdmin main={<Contact />} />,
     exact: true,
   },
-  {
-    path: "/signup",
-    element: <LayoutAdmin main={<SignUp />} />,
-    exact: true,
-  },
 ];
-
-export const privateRoutes = [];
