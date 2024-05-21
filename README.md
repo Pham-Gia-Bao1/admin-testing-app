@@ -71,8 +71,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-## inatall react route
---->>> npm i -D react-router-dom@latest
 
 ## install ant design
 --->>> npm install antd --save
@@ -80,3 +78,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## install animation lib
 ---> npm install --save aos@next
+
+## inatall react route
+
+--->>> npm install react-router-dom
+
+
+## install decode token
+
+---> npm install jwt-decode
+
+## notifications
+
+---> npm install --save react-notifications
+
+using to notify messages
+you need to import {NotificationContainer, NotificationManager} from 'react-notifications'; to use
+
+displays the notification
+--> NotificationManager.info('Info message');
+-->NotificationManager.success('Success message', 'Title here');
+-->NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+--> NotificationManager.error('Error message', 'Click me!', 5000, () => {
+alert('callback');
+});
+
+## installation cookies
+--> npm install js-cookie
