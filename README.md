@@ -102,3 +102,6 @@ displays the notification
 --> NotificationManager.error('Error message', 'Click me!', 5000, () => {
 alert('callback');
 });
+
+## installation cookies
+--> npm install js-cookie
