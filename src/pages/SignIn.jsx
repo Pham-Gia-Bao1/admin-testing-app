@@ -11,15 +11,35 @@ const { Content } = Layout;
 const SignIn = () => {
   const [csrfToken, setCsrfToken] = useState("");
 
+  useEffect(() => {
+    // Fetch CSRF token from the server
+    const fetchCsrfToken = async () => {
+      try {
+        const response = await axios.get(
+          "https://bit-storm-be.zeabur.app/api/csrf-token",
+          {
+            withCredentials: true,
+          }
+        );
+        setCsrfToken(response.data.csrf_token);
+      } catch (error) {
+        console.error("Error fetching CSRF token:", error);
+      }
+    };
+
+    fetchCsrfToken();
+  }, []);
+
   const onFinish = async (values) => {
-    const URL = "http://localhost:8000/api/auth/login"; // Replace with your actual URL
+    const URL = "http://localhost:8000/api/auth/login"; // Thay thế bằng URL thực tế của bạn
     console.log("Success:", values);
     try {
       const response = await axios.post(URL, values, {
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "X-CSRF-TOKEN": csrfToken, // Bao gồm CSRF token trong headers
         },
-        withCredentials: true
+        withCredentials: true,
       });
       const { access_token, expires_in } = response.data;
       setStorage("__token__", access_token);
@@ -27,7 +47,9 @@ const SignIn = () => {
       window.location.href = "/";
     } catch (error) {
       console.log(error);
-      alert("Login failed: " + (error.response?.data?.message || error.message));
+      alert(
+        "Login failed: " + (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -73,7 +95,6 @@ const SignIn = () => {
                 >
                   <Input placeholder="Email" />
                 </Form.Item>
-
                 <Form.Item
                   className="username"
                   label="Password"
