@@ -1,6 +1,6 @@
-import Column from "../components/column";
+
 import { useState, useEffect } from "react";
-import { Button } from "antd";
+import { Table, Button, Modal } from "antd";
 const Comment = () => {
   const [comments, setComments] = useState([]);
 
@@ -22,38 +22,45 @@ const Comment = () => {
             'Authorization': `Bearer ${token}`,
           },
         });
-
-        console.log('HTTP Status:', res.status); // Log HTTP status
-
+      
         if (!res.ok) {
-          throw new Error(`Network response was not ok. Status: ${res.status}`);
+          throw new Error('Network response was not ok');
         }
-
-        const data = await res.json();
-        console.log(data);
-        setComments(data);
+      
+        const data = await res.json(); // Parse the JSON from the response
+      
+        if (data.success) {
+          setComments(data.data.data); // Use the parsed data
+        }
+      
       } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
       }
+      
     };
 
     fetchComments();
   }, []);
   const columns = [
     {
-      title: 'Booking ID',
-      dataIndex: 'id',
-      key: 'id',
+      title: 'User ID',
+      dataIndex: 'user_id',
+      key: 'user_id',
+    },
+    {
+      title: 'Post Id',
+      dataIndex: 'post_id',
+      key: 'post_id',
+    },
+    {
+      title: 'Content',
+      dataIndex: 'content',
+      key: 'content',
     },
     {
       title: 'Status',
       dataIndex: 'status',
       key: 'status',
-    },
-    {
-      title: 'Note',
-      dataIndex: 'note',
-      key: 'note',
     },
     {
       title: 'Created At',
@@ -67,14 +74,31 @@ const Comment = () => {
       key: 'updated_at',
       render: (text) => new Date(text).toLocaleString(),
     },
+    {
+      title: "Update comment",
+      key: "update",
+      render: (record) => (
+        <Button>Update</Button>
+      )
+    },
+    {
+      title: "Delete comment",
+      key: "delete",
+      render: (record) => (
+        <Button>Delete</Button>
+      )
+    },
   ];
   return (
     <div>
-      {comments.length > 0 ? (
-        comments.map((comment,index) => <div key={index}>{comment.content}</div>)
-      ) : (
-        <p>No comments available.</p>
-      )}
+      <Button>Create comments</Button>
+        <h1>Comments</h1>
+      <Table
+        dataSource={comments}
+        columns={columns}
+        rowKey="id"
+        pagination={{ pageSize: 10 }}
+      />
     </div>
   );
 };
