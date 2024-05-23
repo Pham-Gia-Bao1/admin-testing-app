@@ -1,5 +1,7 @@
 
 import { jwtDecode } from "jwt-decode"; // Correctly import jwtDecode
+import axios from "axios";
+
 const ACCESS_TOKEN = "__token__";
 
 export const saveToken = (data) => {
@@ -28,3 +30,19 @@ export const decodeToken = () => {
   return jwtDecode(storedToken);
 }
 
+export const fetchAPI = async (endPoint, setData) => {
+  const token = localStorage.getItem("__token__");
+  try {
+    const response = await axios.get(endPoint, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.data.success) {
+      setData(response.data.data.data);
+      console.log(response.data.data.data);
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
