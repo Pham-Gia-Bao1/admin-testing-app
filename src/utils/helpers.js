@@ -1,4 +1,3 @@
-
 import { jwtDecode } from "jwt-decode"; // Correctly import jwtDecode
 import axios from "axios";
 
@@ -28,15 +27,15 @@ export const getStorage = (storageName) => {
 export const decodeToken = () => {
   const storedToken = localStorage.getItem("__token__");
   return jwtDecode(storedToken);
-}
+};
 
 export const fetchAPI = async (endPoint, setData) => {
   const token = localStorage.getItem("__token__");
+  const headers = headerAPI(token);
+
   try {
     const response = await axios.get(endPoint, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers,
     });
     if (response.data.success) {
       setData(response.data.data.data);
@@ -46,3 +45,28 @@ export const fetchAPI = async (endPoint, setData) => {
     console.error("Error fetching data:", error);
   }
 };
+
+export const fetchAPIUserExpert = async (endPoint, setData) => {
+
+  const headers = headerAPI();
+  try {
+    const response = await axios.get(endPoint, {
+      headers,
+    });
+    if (response.data.success) {
+      setData(response.data.data);
+      console.log(response.data.data);
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+export function headerAPI() {
+  const token = localStorage.getItem("__token__");
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+  };
+  return headers;
+}

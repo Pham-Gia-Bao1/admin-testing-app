@@ -105,3 +105,7 @@ alert('callback');
 
 ## installation cookies
 --> npm install js-cookie
+
+## install icon fort
+1 npm i --save @fortawesome/fontawesome-svg-core
+2 npm i --save @fortawesome/react-fontawesome@latest

@@ -80,9 +80,9 @@ const User = () => {
   return (
     <div style={{ padding: "20px" }}>
       <h1>User List</h1>
-      <Table dataSource={users} columns={columns} rowKey="id" />
+      <Table dataSource={users} columns={columns} rowKey="id"  />
       <Modal
-        
+
         title="User Information"
         visible={userInfoVisible}
         onCancel={() => setUserInfoVisible(false)}
