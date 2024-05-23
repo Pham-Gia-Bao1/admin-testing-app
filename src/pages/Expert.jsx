@@ -62,7 +62,7 @@ const Expert = () => {
       dataIndex: "id",
       key: "id",
       sorter: (a, b) => a.id - b.id,
-  
+
     },
     {
       title: "Avatar",
@@ -149,7 +149,7 @@ const Expert = () => {
   ];
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div>
       <h1>Expert List</h1>
       <Table
         scroll={{ x: true }}
