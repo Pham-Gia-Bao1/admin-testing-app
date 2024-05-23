@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Button, Modal } from "antd";
+import { Table, Button, Modal, message } from "antd";
 import "../assets/styles/booking.css";
 
 const Contacts = () => {
@@ -38,6 +38,38 @@ const Contacts = () => {
     setUserInfoVisible(true);
   };
 
+  const handleStatusUpdate = async (record) => {
+    const token = localStorage.getItem("__token__");
+    const updatedStatus = record.status === 0 ? 1 : 0;
+
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/admin/contacts/${record.id}`,
+        { status: updatedStatus },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        // Update contact status in state
+        setContacts((prevContacts) =>
+          prevContacts.map((contact) =>
+            contact.id === record.id
+              ? { ...contact, status: updatedStatus }
+              : contact
+          )
+        );
+        message.success("Status updated successfully");
+      }
+    } catch (error) {
+      console.error("Error updating status:", error);
+      message.error("Failed to update status");
+    }
+  };
+
   const columns = [
     {
       title: "Contact ID",
@@ -72,12 +104,17 @@ const Contacts = () => {
     },
     {
       title: "Action",
-      key: "user_info",
-      className: "user-info-column",
+      key: "action",
+      className: "action-column",
       render: (record) => (
-        <div className="user-info" style={{display : "flex" , gap : "10px"}}>
+        <div className="action-buttons" style={{ display: "flex", gap: "10px" }}>
           <Button onClick={() => handleUserInfoClick(record)}>User Info</Button>
-          <Button onClick={() => handleUserInfoClick(record)}>Update</Button>
+          <Button onClick={() => handleStatusUpdate(record)} style={{
+              backgroundColor: record.status === 1 ? "blue" : "white",
+              color: record.status === 1 ? "white" : "black",
+            }}>
+            {record.status === 1 ? "Change status to No" : "Change status to Yes"}
+          </Button>
           <Button onClick={() => handleUserInfoClick(record)}>Reply</Button>
         </div>
       ),
