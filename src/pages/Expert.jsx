@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Avatar, Button, Modal, Table, message } from "antd";
 import axios from "axios";
 import { fetchAPIUserExpert,headerAPI } from "../utils/helpers";
-import { render } from "@testing-library/react";
 import "../assets/styles/expert.css";
 const Expert = () => {
   const [experts, setExperts] = useState([]);
@@ -36,7 +35,6 @@ const Expert = () => {
       const response = await axios.put(END_POINT, updatedData, { headers });
       console.log("Updated expert:", response.data);
       if (response.data.success) {
-        // Update contact status in state
         setExperts((prevContacts) =>
           prevContacts.map((expert) =>
             expert.id === record.id
