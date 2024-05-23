@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, Table } from "antd";
+import { Avatar, Button, Modal, Table, message } from "antd";
 import axios from "axios";
-import { fetchAPIUserExpert } from "../utils/helpers";
-
+import { fetchAPIUserExpert,headerAPI } from "../utils/helpers";
+import { render } from "@testing-library/react";
+import "../assets/styles/expert.css";
 const Expert = () => {
   const [experts, setExperts] = useState([]);
   const [userInfoVisible, setUserInfoVisible] = useState(false);
@@ -24,28 +25,30 @@ const Expert = () => {
     setUserInfoVisible(true);
   };
 
-  const handleUpdateExpert = async (expert) => {
+  const handleUpdateExpert = async (record) => {
+    const updatedStatus = record.status === 0 ? 1 : 0;
     try {
-      const END_POINT = `http://127.0.0.1:8000/api/admin/experts/${expert.id}`;
+      const END_POINT = `http://127.0.0.1:8000/api/admin/experts/${record.id}`;
       const updatedData = {
-        status: 1,
+        status: updatedStatus,
       };
-      const token = localStorage.getItem("__token__");
-      console.log(token);
-      const headers = {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      };
-      const result = await axios.put(END_POINT, updatedData, { headers });
-      console.log("Updated expert:", result.data);
-
-      // Update the state with the updated expert data
-      const updatedExperts = experts.map((ex) =>
-        ex.id === expert.id ? { ...ex, ...result.data } : ex
-      );
-      setExperts(updatedExperts);
+      const headers = headerAPI();
+      const response = await axios.put(END_POINT, updatedData, { headers });
+      console.log("Updated expert:", response.data);
+      if (response.data.success) {
+        // Update contact status in state
+        setExperts((prevContacts) =>
+          prevContacts.map((expert) =>
+            expert.id === record.id
+              ? { ...expert, status: updatedStatus }
+              : expert
+          )
+        );
+        message.success("Status updated successfully");
+      }
     } catch (error) {
       console.error("Error updating expert:", error);
+      message.error("Failed to update status");
     }
   };
 
@@ -58,21 +61,43 @@ const Expert = () => {
       title: "STT",
       dataIndex: "id",
       key: "id",
+      sorter: (a, b) => a.id - b.id,
+  
+    },
+    {
+      title: "Avatar",
+      dataIndex: "profile_picture",
+      key: "profile_picture",
+      render  : (profile_picture) => ( <Avatar
+        size={{
+          xs: 18,
+          sm: 20,
+          md: 30,
+          lg: 54,
+          xl: 60,
+          xxl: 100,
+        }}
+        src ={profile_picture}
+      />)
     },
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
+      className : "small-column"
+
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      className : "small-column"
     },
     {
       title: "Address",
       dataIndex: "address",
       key: "address",
+      className : "small-column"
     },
     {
       title: "Phone Number",
@@ -88,16 +113,37 @@ const Expert = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (status) => (
+        <span>
+          <span
+            style={{
+              display: "inline-block",
+              width: "8px",
+              height: "8px",
+              borderRadius: "50%",
+              backgroundColor: status === 1 ? "green" : "red",
+              marginRight: "8px",
+            }}
+          ></span>
+          <span style={{ color: status === 1 ? "green" : "red" }}>
+            {status === 1 ? "active" : "inactive"}
+          </span>
+        </span>
+      ),
     },
     {
       title: "Actions",
       key: "actions",
       render: (record) => (
-        <>
+        <div style={{
+           display : 'flex',
+          //  flexDirection : 'column',
+           gap : '10px',
+        }}>
           <Button onClick={() => handleUserInfoClick(record)}>View</Button>
-          <Button onClick={() => handleUpdateExpert(record)}>Update</Button>
+          <Button style={{ backgroundColor: record.status === 1 ? "green" : "red" }} onClick={() => handleUpdateExpert(record)}>Update</Button>
           <Button danger onClick={() => handleDeleteExpert(record)}>Delete</Button>
-        </>
+        </div>
       ),
     },
   ];
