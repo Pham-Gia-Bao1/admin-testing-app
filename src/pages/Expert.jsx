@@ -27,7 +27,7 @@ const Expert = () => {
   const handleUpdateExpert = async (record) => {
     const updatedStatus = record.status === 0 ? 1 : 0;
     try {
-      const END_POINT = `http://127.0.0.1:8000/api/admin/experts/${record.id}`;
+      const END_POINT = `http://127.0.0.1:8000/api/admin/users/${record.id}`;
       const updatedData = {
         status: updatedStatus,
       };
