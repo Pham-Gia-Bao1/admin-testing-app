@@ -17,6 +17,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme, Input, Avatar, Badge, Space } from "antd";
 import axios from "axios";
+import {API_URL} from '../../utils/helpers'
 
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
@@ -43,7 +44,7 @@ const LayoutAdmin = ({ main }) => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          API_URL + `/api/admin/admin-profile/${userInfo.sub}`,
+          API_URL + `/admin/admin-profile/${userInfo.sub}`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include the token in the request headers

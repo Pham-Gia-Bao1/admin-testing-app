@@ -7,6 +7,7 @@ import {
   DeleteOutlined,
 } from "@ant-design/icons";
 import "../assets/styles/contacts.css";
+import {API_URL} from '../utils/helpers'
 
 const Contacts = () => {
   const [contacts, setContacts] = useState([]);
@@ -21,7 +22,7 @@ const Contacts = () => {
 
       try {
         const response = await axios.get(
-          API_URL + "/api/admin/contacts",
+          API_URL + "/admin/contacts",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -61,7 +62,7 @@ const Contacts = () => {
 
     try {
       const response = await axios.put(
-        API_URL + `/api/admin/contacts/${record.id}`,
+        API_URL + `/admin/contacts/${record.id}`,
         { status: updatedStatus },
         {
           headers: {
@@ -91,7 +92,7 @@ const Contacts = () => {
 
     try {
       const response = await axios.post(
-        API_URL + `/api/admin/replyEmail`,
+        API_URL + `/admin/replyEmail`,
         { message: replyContent, email: selectedContact.email },
         {
           headers: {
@@ -121,7 +122,7 @@ const Contacts = () => {
     }
     try {
       const response = await axios.delete(
-        API_URL + `/api/admin/contacts/${selectedContact.id}`,
+        API_URL + `/admin/contacts/${selectedContact.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
