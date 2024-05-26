@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import{Table, Button, Modal} from 'antd';
 import axios from "axios";
+import {API_URL, headerAPI} from '../utils/helpers'
 const Post=()=>{
   const[posts, setPosts] =useState([]);
   const [postInfoVisible, setPostInfoVisible] = useState(false);
@@ -10,7 +11,7 @@ const Post=()=>{
     const fetchPosts= async() =>{
       try{
         const response = await axios.get(
-          "http://127.0.0.1:8000/api/admin/posts",
+          API_URL + "/admin/posts",
           {
             method: "GET",
             headers: {
@@ -21,7 +22,7 @@ const Post=()=>{
         );
         if(response.data.success){
           console.log("Post: ",response);
-          setPosts(response.data.data);
+          setPosts(response.data.data.data);
         }
       }catch(error){
         console.error("Error fetching posts:",error);
