@@ -6,6 +6,8 @@ const Post=()=>{
   const[posts, setPosts] =useState([]);
   const [postInfoVisible, setPostInfoVisible] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null)
+  const [loading, setLoading] = useState(true);
+
   useEffect(()=>{
     const token = localStorage.getItem("__token__");
     const fetchPosts= async() =>{
@@ -23,6 +25,7 @@ const Post=()=>{
         if(response.data.success){
           console.log("Post: ",response);
           setPosts(response.data.data.data);
+          setLoading(false);
         }
       }catch(error){
         console.error("Error fetching posts:",error);
@@ -122,6 +125,7 @@ const Post=()=>{
         dataSource={posts}
         columns={columns}
         rowKey="id"
+        loading={loading}
         pagination={{pageSize: 10}}
       />
     </>
