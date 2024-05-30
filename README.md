@@ -26,7 +26,7 @@ Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Your app is ready to be deployed.
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
@@ -74,6 +74,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## install ant design
 --->>> npm install antd --save
+## install ant design icon
+npm install @ant-design/icons --save
+link to find icon: https://ant.design/components/icon
 
 
 ## install animation lib
@@ -102,3 +105,13 @@ displays the notification
 --> NotificationManager.error('Error message', 'Click me!', 5000, () => {
 alert('callback');
 });
+
+## installation cookies
+--> npm install js-cookie
+
+## install icon fort
+1 npm i --save @fortawesome/fontawesome-svg-core
+2 npm i --save @fortawesome/react-fontawesome@latest
+
+## install boostrap
+-- > npm install bootstrap

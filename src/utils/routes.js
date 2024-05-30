@@ -1,24 +1,19 @@
-import Dashboard from "../pages/DashBoard";
 import Contact from "../pages/Contact";
+import Dashboard from "../pages/DashBoard";
 
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
 import Comment from "../pages/Comment";
-import User from "../pages/User";
 import Expert from "../pages/Expert";
+import SignIn from "../pages/SignIn";
+import User from "../pages/User";
 
 import LayoutAdmin from "../components/layout";
+import Booking from "../pages/Booking";
 import Post from "../pages/Post";
 
 export const publicRoutes = [
   {
     path: "/signin",
     element: <SignIn />,
-    exact: true,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
     exact: true,
   },
 ];
@@ -57,6 +52,11 @@ export const privateRoutes = [
   {
     path: "/contact",
     element: <LayoutAdmin main={<Contact />} />,
+    exact: true,
+  },
+  {
+    path: "/booking",
+    element: <LayoutAdmin main={<Booking />} />,
     exact: true,
   },
 ];

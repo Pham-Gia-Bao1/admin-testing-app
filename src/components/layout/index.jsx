@@ -5,7 +5,6 @@ import { jwtDecode } from "jwt-decode"; // Correctly import jwtDecode
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
   HomeOutlined,
@@ -13,10 +12,13 @@ import {
   MessageFilled,
   MailFilled,
   LoginOutlined,
+  PayCircleOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { Button, Layout, Menu, theme, Input, Avatar, Badge, Space } from "antd";
 import axios from "axios";
+import {API_URL} from '../../utils/helpers'
+import DemoAvatar from "../user/DemoAvatar";
 
 const { Header, Sider, Content } = Layout;
 const { Search } = Input;
@@ -43,7 +45,7 @@ const LayoutAdmin = ({ main }) => {
     const getUser = async () => {
       try {
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/admin/admin-profile/${userInfo.sub}`,
+          API_URL + `/admin/admin-profile/${userInfo.sub}`,
           {
             headers: {
               Authorization: `Bearer ${token}`, // Include the token in the request headers
@@ -113,6 +115,11 @@ const LayoutAdmin = ({ main }) => {
       key: "6",
       icon: <MailFilled />,
       label: <Link to="/contact">Contact</Link>,
+    },
+    {
+      key: "7",
+      icon: <PayCircleOutlined />,
+      label: <Link to="/booking">Booking</Link>,
     },
   ];
 
@@ -204,7 +211,7 @@ const LayoutAdmin = ({ main }) => {
                   {userProfile && userProfile.data.profile_picture ? (
                     <Avatar
                       shape="square"
-                      src={userProfile.data.profile_picture}
+                      src={userProfile.data.profile_picture ? userProfile.data.profile_picture : DemoAvatar()}
                     />
                   ) : (
                     <Avatar shape="square" icon={<UserOutlined />} />
