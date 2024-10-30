@@ -128,35 +128,26 @@ const LayoutAdmin = ({ main }) => {
     {
       key: "2",
       icon: <VideoCameraOutlined />,
-      label: <Link to="/posts">Posts</Link>,
+      label: <Link to="/rooms">Rooms</Link>,
     },
     {
       key: "3",
-      icon: <MessageFilled />,
-      label: <Link to="/comments">Comments</Link>,
-    },
-    {
-      key: "4",
       icon: <UserOutlined />,
       label: <Link to="/user">User</Link>,
     },
+
     {
-      key: "5",
-      icon: <UserOutlined />,
-      label: <Link to="/expert">Expert</Link>,
-    },
-    {
-      key: "6",
+      key: "4",
       icon: <MailFilled />,
       label: <Link to="/contact">Contact</Link>,
     },
     {
-      key: "7",
+      key: "5",
       icon: <PayCircleOutlined />,
       label: <Link to="/booking">Booking</Link>,
     },
     {
-      key: "8",
+      key: "7",
       icon: <LogoutOutlined />,
       label: <span onClick={handleLogout}>Logout</span>,
     },

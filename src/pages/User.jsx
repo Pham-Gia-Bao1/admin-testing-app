@@ -22,7 +22,7 @@ const User = () => {
           }
         );
         if (response.data.success) {
-          setUsers(response.data.data);
+          setUsers(response.data.data.data);
           setLoading(false)
         }
       } catch (error) {

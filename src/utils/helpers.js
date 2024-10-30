@@ -71,4 +71,4 @@ export function headerAPI() {
   return headers;
 }
 
-export const API_URL = process.env.API_URL || 'https://bitstormbe1.zeabur.app/api'
+export const API_URL = 'https://lay-restaurant.zeabur.app/api'
