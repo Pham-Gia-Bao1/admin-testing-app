@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import LogoBitStorm from "../../assets/images/LogoBitStorm.svg";
+import LogoBitStorm from "../../assets/images/LogoBitStorm.webp";
 import { jwtDecode } from "jwt-decode"; // Correctly import jwtDecode
 import {
   MenuFoldOutlined,
